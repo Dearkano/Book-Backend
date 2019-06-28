@@ -22,9 +22,64 @@ module.exports = appInfo => {
   const userConfig = {
     // myAppName: 'egg',
   };
-
+  // 加载 errorHandler 中间件
+  config.middleware = [ 'errorHandler' ];
+      // 只对 /api 前缀的 url 路径生效
+  config.errorHandler = {
+        match: '/api',
+    }
+  config.mysql = {
+    // 单数据库信息配置
+    client: {
+      // host
+      host: '111.231.75.113',
+      // 端口号
+      port: '3306',
+      // 用户名
+      user: 'root',
+      // 密码
+      password: '123456',
+      // 数据库名
+      database: 'book',
+    },
+    // 是否加载到 app 上，默认开启
+    app: true,
+    // 是否加载到 agent 上，默认关闭
+    agent: false,
+  };
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+};
+    config.cors = {
+    origin: 'http://localhost:9898',
+     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+     credentials: true
+  };
   return {
     ...config,
     ...userConfig,
   };
 };
+
+// config/config.${env}.js
+exports.mysql = {
+    // 单数据库信息配置
+    client: {
+      // host
+      host: '111.231.75.113',
+      // 端口号
+      port: '3306',
+      // 用户名
+      user: 'root',
+      // 密码
+      password: '123456',
+      // 数据库名
+      database: 'book',
+    },
+    // 是否加载到 app 上，默认开启
+    app: true,
+    // 是否加载到 agent 上，默认关闭
+    agent: false,
+  };
