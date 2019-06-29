@@ -13,4 +13,5 @@ module.exports = app => {
   router.get('/user', app.controller.user.getUser)
   router.get('/me', app.controller.user.getMe)
   router.get('/logout', app.controller.user.logout)
+  router.post('/upload', app.controller.book.uploadBook)
 };
