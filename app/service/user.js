@@ -32,6 +32,17 @@ class UserService extends Service {
         return {success:false, errMessage: 'wrong password'}
     }
   }
+  async getUserById(id){
+    const { app } = this
+    const row = await app.mysql.get('user', {id:id})
+    if(row){
+        const user = JSON.parse(JSON.stringify(row))
+        return {user, success: true}
+    }
+    else {
+        return {success:false, errMessage: 'wrong password'}
+    }
+  }
 }
 
 module.exports = UserService;

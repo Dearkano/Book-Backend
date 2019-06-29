@@ -34,7 +34,17 @@ class UserController extends Controller {
             ctx.status = 400
         }
     }
-
+    async getUserById(){
+        const { ctx } = this
+        const userBody = await ctx.service.user.getUserById(ctx.query['id'])
+        if(userBody.success){
+            ctx.body = userBody.user
+            ctx.status = 200
+        } else {
+            ctx.body = 'wrong userId'
+            ctx.status = 400
+        }
+    }
     async getMe(){
         const username = this.ctx.session.username
         console.log(this.ctx.session)

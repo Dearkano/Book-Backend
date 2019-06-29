@@ -14,24 +14,31 @@ class BookService extends Service {
         }
         delete params.imgUrl
         const result1 = await app.mysql.insert('books', params)
-        console.log(result1)
         // await app.mysql.insert('user_book',{user_id:userId, book_id})
         const isSuccess = result1.affectedRows === 1
+        if(isSuccess){
+            const bookId = result1.insertId
+            await app.mysql.insert('user_book', {book_id:bookId, user_id:userId})
+        }
         return isSuccess
+    }
+
+    async getAllBooks() {
+        const result = await this.app.mysql.select('books')
+        console.log(result)
+        return JSON.parse(JSON.stringify(result))
     }
 
     async getBookByName(bookName) {
         const {
             app
         } = this
-        const result = await app.mysql.get('books', {
-            name: bookName
-        })
+        const result = await app.mysql.query(`select * from books where name like "${bookName}"`)
         if (result) {
             const book = JSON.parse(JSON.stringify(result))
             return {
                 success: true,
-                book: book
+                book: book[0]
             }
         } else {
             return {
