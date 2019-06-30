@@ -23,6 +23,6 @@ module.exports = app => {
   router.get('/getBuyList', controller.buy.getBuyList)
   router.post('/issueWish', controller.buy.issueWish)
   router.post('/buy', controller.book.buy)
-  router.get('/receivePay',controller.book.receivePay)
+  router.post('/receivePay',controller.book.receivePay)
   router.get('/verifyPay', controller.book.verifyPay)
 };

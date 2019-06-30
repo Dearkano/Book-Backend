@@ -43,12 +43,13 @@ class BookController extends Controller {
       const userBody = await ctx.service.user.getUser(username)
       const user = userBody.user
       const body = ctx.request.body
+      console.log(body)
       const identification = '4UON0APK6S5Y4LK6'
       const token = 'M5462S1V2B3QZIJXK7JXX6XCSYIE7FCE'
       let {price, bookName} = body
       price = price * 100
       const orderid = md5(`${bookName}${price}${user.username}${Date.now()}`).substr(0, 10)
-      const notify_url = 'http://111.231.75.113'
+      const notify_url = 'http://111.231.75.113:7001/receivePay'
       const return_url = 'http://localhost:9898'
       const type = 2
       const key = md5(`${bookName}${identification}${notify_url}${orderid}${user.username}${price}${return_url}${token}${type}`)
