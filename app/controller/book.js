@@ -77,6 +77,7 @@ class BookController extends Controller {
           amount: body.actual_price
       }
       const res = await ctx.service.book.receivePay(params)
+      ctx.status = 200
   }
 
   async verifyPay() {
