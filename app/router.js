@@ -8,7 +8,7 @@ module.exports = app => {
   router.get('/', controller.home.index);
   router.post('/register', controller.user.register)
   router.post('/login', controller.user.login)
-  router.get('/user', controller.user.getUser)
+  router.get('/getUserByName', controller.user.getUser)
   router.get('/me', controller.user.getMe)
   router.get('/logout', controller.user.logout)
   router.post('/upload', controller.book.uploadBook)
@@ -19,4 +19,7 @@ module.exports = app => {
   router.get('/getMessage', controller.message.getMessage)
   router.get('/getUserById', controller.user.getUserById)
   router.post('/sendMessage', controller.message.sendMessage)
+  router.get('/getUserByBookName', controller.user.getUserByBookName)
+  router.get('/getBuyList', controller.buy.getBuyList)
+  router.post('/issueWish', controller.buy.issueWish)
 };

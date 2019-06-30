@@ -43,6 +43,18 @@ class UserService extends Service {
         return {success:false, errMessage: 'wrong password'}
     }
   }
+  async getUserByBookName(name){
+    const { app } = this
+    let r = await app.mysql.get('books', {name:name})
+    r = JSON.parse(JSON.stringify(r))
+    const bookId = r.id
+    let s = await app.mysql.get('user_book', {book_id:bookId})
+    s = JSON.parse(JSON.stringify(s))
+    const userId = s.user_id
+    let k = await app.mysql.get('user', {id:userId})
+    k = JSON.parse(JSON.stringify(k))
+    return k
+  }
 }
 
 module.exports = UserService;

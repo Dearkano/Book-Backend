@@ -63,5 +63,11 @@ class UserController extends Controller {
         this.ctx.status = 200
         this.ctx.body = 'logout'
     }
+
+    async getUserByBookName(){
+        const data = await this.ctx.service.user.getUserByBookName(this.ctx.request.query['name'])
+        this.ctx.body = data
+        this.ctx.status = 200
+    }
 }
 module.exports = UserController;
