@@ -129,6 +129,20 @@ class BookService extends Service {
         }
     }
 
+    async receivePay(params){
+        const {app} = this
+        const result = await app.mysql.insert('pay',params)
+        const insertSuccess = result.affectedRows === 1
+        if(insertSuccess) return true
+        else return false
+    }
+
+    async verifyPay(orderId){
+        const {app} = this
+        const result = await app.mysql.get('pay',{orderId:orderId})
+        if(result)return true
+        else return false
+    }
 }
 
 module.exports = BookService;
