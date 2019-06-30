@@ -71,6 +71,7 @@ class BookController extends Controller {
   async receivePay() {
       const { ctx } = this
       const body = ctx.request.body
+      console.log(body)
       const params = {
           orderId: body.orderid,
           amount: body.actual_price
